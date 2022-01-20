@@ -5,12 +5,32 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp
+  # create an array to check the cohort data
+  months = ["january", "february", "march", "april", "may", "june", "july",
+  "august", "september", "october", "november", "december"]
   # while the name is not empty, repeat this code
   while !name.empty? do
-    # add the stident hash to the array
-    students << {name: name, cohort: :november, country: :UK, age: :thirty}
-    puts "Now we have #{students.count} students".center(40)
+    # and ask for the cohort
+    puts "Please enter the month of the cohort"
+    # get the cohort
+    cohort = gets.chomp.downcase
+    # validate cohort
+    until months.include? cohort.downcase
+      # if nothing entered, apply deafault
+      if cohort.empty?
+        cohort = "january"
+      else
+      # if invalid, ask again then get the cohort
+      puts "Invalid month entered for cohort, please try again"
+      cohort = gets.chomp.downcase
+      end
+    end
+      # if valid add the student hash to the array
+      cohort = cohort.to_sym
+      students << {name: name, cohort: cohort, country: :UK, age: :thirty}
+      puts "Now we have #{students.count} students"
     # get another name from the user
+    puts "Please enter another name"
     name = gets.chomp
   end
   # return the array of students
