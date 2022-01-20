@@ -45,9 +45,7 @@ end
 def print(students)
   i = 0
   while i < students.length
-    if students[i][:name].start_with?("A") == true && students[i][:name].length < 12
       puts "#{i+1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(40)
-    end
     i += 1
   end
 end
