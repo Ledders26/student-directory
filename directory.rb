@@ -28,7 +28,11 @@ def input_students
       # if valid add the student hash to the array
       cohort = cohort.to_sym
       students << {name: name, cohort: cohort, country: :UK, age: :thirty}
-      puts "Now we have #{students.count} students"
+      if students.count == 1
+        puts "Now we have 1 student"
+      else
+        puts "now we have #{students.count} students"
+      end
     # get another name from the user
     puts "Please enter another name"
     name = gets.chomp
@@ -70,7 +74,11 @@ def print(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students".center(40)
+  if students.count == 1
+    puts "Overall we have 1 great student"
+  else
+    puts "Overall, we have #{students.count} great students".center(40)
+  end
 end
 
 # we have to call the methods!!
