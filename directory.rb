@@ -37,6 +37,25 @@ def input_students
   students
 end
 
+def cohort_list(students)
+  # create a list of all cohorts
+  cohorts = students.map { |student| student[:cohort] }.uniq
+  return cohorts
+end
+
+def print_cohorts(cohort, students)
+  cohorts_array = Array.new
+  cohort.each { |c|
+    cohorts_array << c
+    students.each { |student|
+      if student[:cohort] == c
+        cohorts_array << student[:name]
+      end
+    }
+  }
+  puts cohorts_array
+end
+
 def print_header
   puts "The students of Villains Academy".center(40)
   puts "-------------".center(40)
@@ -56,6 +75,8 @@ end
 
 # we have to call the methods!!
 students = input_students
+cohorts = cohort_list(students)
 print_header
-print(students)
+print_cohorts(cohorts,students)
+#print(students)
 print_footer(students)
