@@ -23,6 +23,7 @@ def process_menu_choice(selection)
   when "3"
     save_students
   when "9"
+    puts "Goodbye!"
     exit # this will cause the programme to terminate
   else
     puts "I don't know what you meant, try again"
@@ -32,15 +33,11 @@ end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  # get the first name
-  name = STDIN.gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
-    # add the student hash to the array
-    add_to_students(name, :november)
+  name = STDIN.gets.chomp # get the first name
+  while !name.empty? do # while the name is not empty, repeat this code
+    add_to_students(name, :november) # add the student hash to the array
     puts "Now we have #{@students.count} students"
-    # get another name from the user
-    name = STDIN.gets.chomp
+    name = STDIN.gets.chomp # get another name from the user
   end
 end
 
@@ -66,14 +63,13 @@ def print_footer
 end
 
 def save_students
-  # open the file for writing
-  file = File.open("students.csv", "w")
-  # iterate over the array of students
-  @students.each do |student|
+  file = File.open("students.csv", "w") # open the file for writing
+  @students.each do |student| # iterate over the array of students
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
+  puts "File students.csv has been saved"
   file.close
 end
 
