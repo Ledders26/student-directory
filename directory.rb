@@ -83,8 +83,15 @@ end
 
 # we have to call the methods!!
 students = input_students
-cohorts = cohort_list(students)
-print_header
-print_cohorts(cohorts,students)
-#print(students)
-print_footer(students)
+# check if any students have been entered
+if students.length == 0
+  # if not, tell them
+  puts "No Students have been entered"
+else
+  # if students are there, complete the rest of the output
+  cohorts = cohort_list(students)
+  print_header
+  print_cohorts(cohorts,students)
+  #print(students)
+  print_footer(students)
+end
