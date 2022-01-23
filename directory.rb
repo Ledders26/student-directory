@@ -4,18 +4,17 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
   puts "9. Exit" # 9 because we will add more
 end
 
 def interactive_menu
   loop do
   print_menu
-  process(STDIN.gets.chomp)
+  process_menu_choice(STDIN.gets.chomp)
   end
 end
 
-def process(selection)
+def process_menu_choice(selection)
   case selection
   when "1"
     input_students
@@ -23,8 +22,6 @@ def process(selection)
     show_students
   when "3"
     save_students
-  when "4"
-    load_students
   when "9"
     exit # this will cause the programme to terminate
   else
@@ -39,13 +36,12 @@ def input_students
   name = STDIN.gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? do
-    # add the stident hash to the array
+    # add the student hash to the array
     add_to_students(name, :november)
     puts "Now we have #{@students.count} students"
     # get another name from the user
     name = STDIN.gets.chomp
   end
-  # return the array of students
 end
 
 def show_students
@@ -87,15 +83,16 @@ def load_students(filename = "students.csv")
   name, cohort = line.chomp.split(',')
     add_to_students(name, cohort)
   end
+  puts "Loaded #{@students.count} from #{filename}"
   file.close
 end
 
 def try_load_students
   filename = ARGV.first # first argument from the command line
-  return if filename.nil? # get out of the method if it isn't given
-  if File.exists?(filename) # if it exists
+  if filename.nil? # if no filename given, call without parameter so default used
+    load_students
+  elsif File.exists?(filename) # if it exists
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist"
     exit # quit the program
