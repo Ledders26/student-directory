@@ -3,7 +3,8 @@
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
+  puts "3. Save a list of students"
+  puts "4. Load a list of students"
   puts "9. Exit" # 9 because we will add more
 end
 
@@ -21,7 +22,13 @@ def process_menu_choice(selection)
   when "2"
     show_students
   when "3"
-    save_students
+    puts "Please provide the filename"
+    file = gets.chomp
+    save_students(file)
+  when "4"
+    puts "Please provide the filename"
+    file = gets.chomp
+    load_students(file)
   when "9"
     puts "Goodbye!"
     exit # this will cause the programme to terminate
@@ -62,25 +69,25 @@ def print_footer
   puts "Overall, we have #{@students.count} great students"
 end
 
-def save_students
-  file = File.open("students.csv", "w") # open the file for writing
-  @students.each do |student| # iterate over the array of students
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+def save_students(filename)
+  file = File.open(filename, "w") do |file| # open the file for writing
+    @students.each do |student| # iterate over the array of students
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  puts "File students.csv has been saved"
-  file.close
+  puts "File #{filename} has been saved"
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-    add_to_students(name, cohort)
+  file = File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      add_to_students(name, cohort)
+    end
   end
   puts "Loaded #{@students.count} from #{filename}"
-  file.close
 end
 
 def try_load_students
