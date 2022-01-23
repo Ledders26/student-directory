@@ -41,7 +41,6 @@ def input_students
   students
 end
 
-<<<<<<< HEAD
 def interactive_menu
   students = []
   loop do
@@ -65,25 +64,6 @@ def interactive_menu
       puts "I don't know what you meant, try again"
     end
   end
-=======
-def cohort_list(students)
-  # create a list of all cohorts
-  cohorts = students.map { |student| student[:cohort] }.uniq
-  return cohorts
-end
-
-def print_cohorts(cohort, students)
-  cohorts_array = Array.new
-  cohort.each { |c|
-    cohorts_array << c
-    students.each { |student|
-      if student[:cohort] == c
-        cohorts_array << student[:name]
-      end
-    }
-  }
-  puts cohorts_array
->>>>>>> be241683aec56af8e738e4b42c480a2977643f2e
 end
 
 def print_header
@@ -107,22 +87,5 @@ def print_footer(students)
   end
 end
 
-<<<<<<< HEAD
 # now call the interactive menu
 interactive_menu
-=======
-# we have to call the methods!!
-students = input_students
-# check if any students have been entered
-if students.length == 0
-  # if not, tell them
-  puts "No Students have been entered"
-else
-  # if students are there, complete the rest of the output
-  cohorts = cohort_list(students)
-  print_header
-  print_cohorts(cohorts,students)
-  #print(students)
-  print_footer(students)
-end
->>>>>>> be241683aec56af8e738e4b42c480a2977643f2e
