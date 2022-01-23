@@ -5,36 +5,12 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp
-  # create an array to check the cohort data
-  months = ["january", "february", "march", "april", "may", "june", "july",
-  "august", "september", "october", "november", "december"]
   # while the name is not empty, repeat this code
   while !name.empty? do
-    # and ask for the cohort
-    puts "Please enter the month of the cohort"
-    # get the cohort
-    cohort = gets.chomp.downcase
-    # validate cohort
-    until months.include? cohort.downcase
-      # if nothing entered, apply deafault
-      if cohort.empty?
-        cohort = "january"
-      else
-      # if invalid, ask again then get the cohort
-      puts "Invalid month entered for cohort, please try again"
-      cohort = gets.chomp.downcase
-      end
-    end
-      # if valid add the student hash to the array
-      cohort = cohort.to_sym
-      students << {name: name, cohort: cohort, country: :UK, age: :thirty}
-      if students.count == 1
-        puts "Now we have 1 student"
-      else
-        puts "now we have #{students.count} students"
-      end
+    # add the stident hash to the array
+    students << {name: name, cohort: :november}
+    puts "Now we have #{students.count} students"
     # get another name from the user
-    puts "Please enter another name"
     name = gets.chomp
   end
   # return the array of students
@@ -67,24 +43,18 @@ def interactive_menu
 end
 
 def print_header
-  puts "The students of Villains Academy".center(40)
-  puts "-------------".center(40)
+  puts "The students of Villains Academy"
+  puts "-------------"
 end
 
 def print(students)
-  i = 0
-  while i < students.length
-      puts "#{i+1}. #{students[i][:name]} (#{students[i][:cohort]} cohort)".center(40)
-    i += 1
+  students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
 def print_footer(students)
-  if students.count == 1
-    puts "Overall we have 1 great student"
-  else
-    puts "Overall, we have #{students.count} great students".center(40)
-  end
+  puts "Overall, we have #{students.count} great students"
 end
 
 # now call the interactive menu
